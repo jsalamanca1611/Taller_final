@@ -1,67 +1,112 @@
 <!DOCTYPE html>
 <html lang="es">
-<!-- Nombre: [Tu nombre] | Documento: [Tu número] -->
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simulador de Nómina</title>
+  <title>Simulador de Nómina 2026</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
- 
-  <h1>Simulador de Prestaciones 2026</h1>
- 
-  <form id="datosGenerales">
-    <label>Nombre <input type="text" id="nombre"></label>
-    <label>Edad <input type="text" id="edad"></label>
-    <label>Tipo de documento
-      <select id="tipoDocumento">
-        <option value="">-- Seleccione --</option>
-        <option value="RC">RC</option>
-        <option value="TI">TI</option>
-        <option value="CC">CC</option>
-        <option value="CE">CE</option>
-        <option value="PP">PP</option>
-      </select>
-    </label>
-    <label>Número de documento <input type="text" id="numeroDocumento"></label>
-    <button type="submit">Continuar</button>
-  </form>
- 
-  <form id="datosSalariales" style="display:none; flex-direction:column;">
-    <label>Salario <input type="text" id="salario"></label>
-    <label>Comisiones <input type="text" id="comisiones"></label>
-    <label>Horas extra <input type="text" id="horasExtra"></label>
-    <label>Nivel de riesgo ARL
-      <select id="nivelRiesgo">
-        <option value="">-- Seleccione --</option>
-        <option value="0">Riesgo I – Mínimo (0.522%)</option>
-        <option value="1">Riesgo II – Bajo (1.044%)</option>
-        <option value="2">Riesgo III – Medio (2.436%)</option>
-        <option value="3">Riesgo IV – Alto (4.350%)</option>
-        <option value="4">Riesgo V – Máximo (6.960%)</option>
-      </select>
-    </label>
-    <button type="submit">Calcular</button>
-  </form>
- 
-  <ul id="errores" style="display:none"></ul>
- 
-  <div id="resultados" style="display:none;">
-    <p id="salarioRes"></p>
-    <p id="comisionesRes"></p>
-    <p id="horasExtraRes"></p>
-    <p id="totalDev"></p>
-    <p id="ibc"></p>
-    <p id="auxTransporte"></p>
-    <p id="salud"></p>
-    <p id="pension"></p>
-    <p id="fondoSolidaridad"></p>
-    <p id="arl"></p>
-    <p id="totalDed"></p>
-    <p id="neto"></p>
-  </div>
- 
-  <script src="script.js"></script>
+
+  <header>
+    <h1>Simulador de Prestaciones Laborales</h1>
+    <p>Valores vigentes 2026 · SMMLV $1.750.905</p>
+  </header>
+
+  <main>
+
+    <form id="datosGenerales">
+      <p class="form-title">01 · Datos personales</p>
+      <label>Nombre completo
+        <input type="text" id="nombre" placeholder="Ej. María González">
+      </label>
+      <label>Edad
+        <input type="text" id="edad" placeholder="Ej. 35">
+      </label>
+      <label>Tipo de documento
+        <select id="tipoDocumento">
+          <option value="">-- Seleccione --</option>
+          <option value="RC">RC – Registro Civil</option>
+          <option value="TI">TI – Tarjeta de Identidad</option>
+          <option value="CC">CC – Cédula de Ciudadanía</option>
+          <option value="CE">CE – Cédula de Extranjería</option>
+          <option value="PP">PP – Pasaporte</option>
+        </select>
+      </label>
+      <label>Número de documento
+        <input type="text" id="numeroDocumento" placeholder="Sin puntos ni comas">
+      </label>
+      <button type="submit">Continuar →</button>
+    </form>
+
+    <form id="datosSalariales" style="display:none; flex-direction:column;">
+      <p class="form-title">02 · Información salarial</p>
+      <label>Salario mensual (COP)
+        <input type="text" id="salario" placeholder="Ej. 3500000">
+      </label>
+      <label>Comisiones (COP)
+        <input type="text" id="comisiones" placeholder="Ej. 500000">
+      </label>
+      <label>Total horas extra (COP)
+        <input type="text" id="horasExtra" placeholder="Ej. 200000">
+      </label>
+      <label>Nivel de riesgo ARL
+        <select id="nivelRiesgo">
+          <option value="">-- Seleccione --</option>
+          <option value="0">Riesgo I – Mínimo (0.522%)</option>
+          <option value="1">Riesgo II – Bajo (1.044%)</option>
+          <option value="2">Riesgo III – Medio (2.436%)</option>
+          <option value="3">Riesgo IV – Alto (4.350%)</option>
+          <option value="4">Riesgo V – Máximo (6.960%)</option>
+        </select>
+      </label>
+      <button type="submit">Calcular prestaciones</button>
+    </form>
+
+    <ul id="errores" style="display:none"></ul>
+
+    <div id="resultados" style="display:none;">
+      <p class="form-title">03 · Resultados</p>
+
+      <div class="res-section">
+        <p class="res-label">Devengado</p>
+        <p id="salarioRes"></p>
+        <p id="comisionesRes"></p>
+        <p id="horasExtraRes"></p>
+        <p id="totalDev"></p>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="res-section">
+        <p class="res-label">Base de cotización</p>
+        <p id="ibc"></p>
+        <p id="auxTransporte"></p>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="res-section">
+        <p class="res-label">Deducciones</p>
+        <p id="salud"></p>
+        <p id="pension"></p>
+        <p id="fondoSolidaridad"></p>
+        <p id="arl"></p>
+        <p id="totalDed"></p>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="res-section">
+        <p class="res-label">Ingreso neto</p>
+        <p id="neto"></p>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>SMMLV $1.750.905 · Subsidio de transporte $249.095 · UVT $52.37</footer>
+
+  <script src="Taller.js"></script>
 </body>
 </html>
